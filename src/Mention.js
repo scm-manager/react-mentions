@@ -42,17 +42,4 @@ Mention.propTypes = {
   isLoading: PropTypes.bool,
 }
 
-Mention.defaultProps = {
-  trigger: '@',
-  markup: '@[__display__](__id__)',
-  displayTransform: function(id, display) {
-    return display || id
-  },
-  onAdd: () => null,
-  onRemove: () => null,
-  renderSuggestion: null,
-  isLoading: false,
-  appendSpaceOnAdd: false,
-}
-
 export default Mention

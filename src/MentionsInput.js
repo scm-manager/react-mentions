@@ -2,6 +2,8 @@ import React, { Children } from 'react'
 import {
   applyChangeToValue,
   countSuggestions,
+  defaultDisplayTransform,
+  defaultMarkup,
   escapeRegex,
   findStartOfMentionInPlainText,
   getEndOfLastMention,
@@ -899,7 +901,8 @@ class MentionsInput extends React.Component {
         return
       }
 
-      const regex = makeTriggerRegex(child.props.trigger, this.props)
+      const { trigger = '@' } = child.props
+      const regex = makeTriggerRegex(trigger, this.props)
       const match = substring.match(regex)
       if (match) {
         const querySequenceStart =
@@ -1008,8 +1011,8 @@ class MentionsInput extends React.Component {
     const config = readConfigFromChildren(this.props.children)
     const mentionsChild = Children.toArray(this.props.children)[childIndex]
     const {
-      markup,
-      displayTransform,
+      markup = defaultMarkup,
+      displayTransform = defaultDisplayTransform,
       appendSpaceOnAdd,
       onAdd,
     } = mentionsChild.props
@@ -1061,7 +1064,7 @@ class MentionsInput extends React.Component {
   isLoading = () => {
     let isLoading = false
     React.Children.forEach(this.props.children, function(child) {
-      isLoading = isLoading || (child && child.props.isLoading)
+      isLoading = isLoading || (child && Boolean(child.props.isLoading))
     })
     return isLoading
   }

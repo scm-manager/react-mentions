@@ -2,10 +2,11 @@ import { Children } from 'react'
 import invariant from 'invariant'
 import markupToRegex from './markupToRegex'
 import countPlaceholders from './countPlaceholders'
+import defaultMarkup from './defaultMarkup'
 
 const readConfigFromChildren = children =>
   Children.toArray(children).map(
-    ({ props: { markup, regex, displayTransform } }) => ({
+    ({ props: { markup = defaultMarkup, regex, displayTransform } }) => ({
       markup,
       regex: regex
         ? coerceCapturingGroups(regex, markup)

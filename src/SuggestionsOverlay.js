@@ -81,7 +81,9 @@ function SuggestionsOverlay({
   const renderSuggestion = (result, queryInfo, index) => {
     const isFocused = index === focusIndex
     const { childIndex, query } = queryInfo
-    const { renderSuggestion } = Children.toArray(children)[childIndex].props
+    const { renderSuggestion = null } = Children.toArray(children)[
+      childIndex
+    ].props
 
     return (
       <Suggestion
